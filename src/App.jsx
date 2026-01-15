@@ -13,11 +13,17 @@ function App() {
       <main className = "app__main">
         <Routes>
           <Route path = "/" element = {<Home/>} />
-          <Route path = "/task" element = {<TaskList/>} />
-          <Route path = "/tast/:id" element = {<TaskDetails/>} />
+          <Route path = "/tasks" element = {<TaskList/>} />
+          <Route path = "/tasks/:id" element = {<TaskDetails/>} />
           <Route path = "*" element = {<NotFound/>} />
         </Routes>
       </main>
+      <footer className="site-footer">
+        <div className="site-footer__inner">
+          <p>Copyrights © 2026 All Rights Reserved by W3 Engineers Ltd.</p>
+          <p>Terms and Conditions</p>
+        </div>
+      </footer>
     </>
   )
 }
