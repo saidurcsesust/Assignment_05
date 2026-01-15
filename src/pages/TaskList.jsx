@@ -8,6 +8,8 @@ const TASKS_URL = 'https://jsonplaceholder.typicode.com/todos'
 const PAGE_SIZE = 20
 
 export default function TaskList() {
+
+  // fetch data using API
   const { data: tasks, loading, error } = useFetch(TASKS_URL)
   const [query, setQuery] = useState('')
   const [page, setPage] = useState(1)
@@ -45,7 +47,8 @@ export default function TaskList() {
   return (
     <section className="tasks">
       <header className="tasks__header">
-
+          
+          {/* search Bar */}
           <label className="tasks__search">
             <span>Search</span>
             <input
@@ -69,8 +72,10 @@ export default function TaskList() {
       {!loading && !error && (
         <>
           <p className="tasks__count">
-            Showing {pagedTasks.length} of {filteredTasks.length} tasks
+            Showing {(page*PAGE_SIZE) === 0? 20: page* PAGE_SIZE} of {filteredTasks.length} tasks
           </p>
+
+          {/* card start here */}
           <div className="tasks__grid">
             {pagedTasks.map((task) => (
               <article
@@ -80,7 +85,7 @@ export default function TaskList() {
               >
                 <div>
                   <p className="task-card__meta">Task #{task.id}</p>
-                  <h3>{task.title}</h3>
+                  <h4>{task.title}</h4>
                 </div>
                 <div className="task-card__footer">
                   {task.completed ? (
@@ -95,6 +100,8 @@ export default function TaskList() {
               </article>
             ))}
           </div>
+
+           {/* add pagination here */}
           {totalPages > 1 && (
             <div className="tasks__pagination">
               <button
@@ -118,6 +125,7 @@ export default function TaskList() {
               </button>
             </div>
           )}
+          
           {filteredTasks.length === 0 && (
             <p className="tasks__empty">No tasks match your search.</p>
           )}
