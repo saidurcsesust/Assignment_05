@@ -28,21 +28,10 @@ export default function TaskList() {
     Math.ceil(filteredTasks.length / PAGE_SIZE),
   )
 
-  useEffect(() => {
-    setPage(1)
-  }, [query, tasks])
-
   const pagedTasks = useMemo(() => {
     const start = (page - 1) * PAGE_SIZE
     return filteredTasks.slice(start, start + PAGE_SIZE)
-  }, [filteredTasks, page])
-
-  const handlePageChange = (nextPage) => {
-    setPage((current) => {
-      const clamped = Math.min(Math.max(nextPage, 1), totalPages)
-      return clamped
-    })
-  }
+  }, [filteredTasks, page]) 
 
   return (
     <section className="tasks">
@@ -53,7 +42,7 @@ export default function TaskList() {
             <span>Search</span>
             <input
               type="search"
-              placeholder="Filter by title"
+              placeholder="Search by title"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
             />
@@ -72,7 +61,7 @@ export default function TaskList() {
       {!loading && !error && (
         <>
           <p className="tasks__count">
-            Showing {(page*PAGE_SIZE) === 0? 20: page* PAGE_SIZE} of {filteredTasks.length} tasks
+            Showing {page*PAGE_SIZE} of {filteredTasks.length} tasks
           </p>
 
           {/* card start here */}
@@ -88,7 +77,7 @@ export default function TaskList() {
               <button
                 type="button"
                 className="pagination__button"
-                onClick={() => handlePageChange(page - 1)}
+                onClick={() => setPage(page - 1)}
                 disabled={page === 1}
               >
                 Prev
@@ -99,7 +88,7 @@ export default function TaskList() {
               <button
                 type="button"
                 className="pagination__button"
-                onClick={() => handlePageChange(page + 1)}
+                onClick={() => setPage(page + 1)}
                 disabled={page === totalPages}
               >
                 Next
