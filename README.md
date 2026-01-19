@@ -21,6 +21,10 @@ persist across reloads.
 
 ## Getting Started
 
+## Live Demo
+
+- https://eclectic-taffy-486dfc.netlify.app/tasks
+
 ### Clone the repository
 
 ```bash
