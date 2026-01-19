@@ -13,7 +13,15 @@ export default function TaskList() {
   // fetch data using API
   const { data: tasks, loading, error } = useFetch(TASKS_URL)
   const [taskItems, setTaskItems] = useState([])
-  const [statusOverrides, setStatusOverrides] = useState({})
+  const [statusOverrides, setStatusOverrides] = useState(() => {
+    const stored = localStorage.getItem(STORAGE_KEY)
+    if (!stored) return {}
+    try {
+      return JSON.parse(stored)
+    } catch {
+      return {}
+    }
+  })
   const [query, setQuery] = useState('')
   const [page, setPage] = useState(1)
 
@@ -53,8 +61,11 @@ export default function TaskList() {
     return filteredTasks.slice(start, start + PAGE_SIZE)
   }, [filteredTasks, page]) 
 
-  const handleStatusClick = (taskId) => {
-    setStatusOverrides((prev) => ({ ...prev, [taskId]: true }))
+  const handleStatusClick = (taskId, currentStatus) => {
+    setStatusOverrides((prev) => ({
+      ...prev,
+      [taskId]: !currentStatus,
+    }))
   }
 
   return (

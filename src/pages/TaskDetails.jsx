@@ -1,13 +1,49 @@
-import { Link, useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import Loader from '../components/Loader.jsx'
 import ErrorMessage from '../components/ErrorMessage.jsx'
 import useFetch from '../hooks/useFetch.js'
 
+const STORAGE_KEY = 'taskStatusOverrides'
+
 export default function TaskDetails() {
   const { id } = useParams()
+  const location = useLocation()
+  const [statusOverrides, setStatusOverrides] = useState({})
+  const taskFromList = location.state?.task
   const { data: task, loading, error } = useFetch(
-    `https://jsonplaceholder.typicode.com/todos/${id}`,
+    taskFromList ? null : `https://jsonplaceholder.typicode.com/todos/${id}`,
   )
+  const activeTask = taskFromList || task
+  const displayTask = activeTask
+    ? {
+        ...activeTask,
+        completed:
+          statusOverrides[activeTask.id] ?? activeTask.completed,
+      }
+    : null
+
+  useEffect(() => {
+    const stored = localStorage.getItem(STORAGE_KEY)
+    if (!stored) return
+    try {
+      setStatusOverrides(JSON.parse(stored))
+    } catch {
+      setStatusOverrides({})
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(statusOverrides))
+  }, [statusOverrides])
+
+  const handleToggleStatus = () => {
+    if (!displayTask) return
+    setStatusOverrides((prev) => ({
+      ...prev,
+      [displayTask.id]: !displayTask.completed,
+    }))
+  }
 
   return (
     <section className="task-detail">
@@ -20,36 +56,38 @@ export default function TaskDetails() {
         </Link>
       </div>
 
-      {loading && <Loader label="Loading task..." />}
+      {loading && !taskFromList && <Loader label="Loading task..." />}
       {error && <ErrorMessage message={error} />}
 
-      {task && !loading && !error && (
+      {displayTask && !loading && !error && (
         <div className="task-detail__content">
           <article
             className={`task-detail__card ${
-              task.completed ? 'task-detail__card--done' : ''
+              displayTask.completed ? 'task-detail__card--done' : ''
             }`}
           >
             <div className="task-detail__status">
-              <span
+              <button
+                type="button"
                 className={`status-pill ${
-                  task.completed ? '' : 'status-pill--pending'
+                  displayTask.completed ? '' : 'status-pill--pending'
                 }`}
+                onClick={handleToggleStatus}
               >
-                {task.completed ? 'Completed' : 'In progress'}
-              </span>
+                {displayTask.completed ? 'Completed' : 'Pending'}
+              </button>
             </div>
-            <h2 className="task-detail__title">{task.title}</h2>
+            <h2 className="task-detail__title">{displayTask.title}</h2>
             
             <div className="task-detail__metrics">
               
               <div className="task-detail__metric">
                 <span>User ID</span>
-                <strong>#{task.userId}</strong>
+                <strong>#{displayTask.userId}</strong>
               </div>
               <div className="task-detail__metric">
                 <span>Task ID</span>
-                <strong>#{task.id}</strong>
+                <strong>#{displayTask.id}</strong>
               </div>
             </div>
           </article>

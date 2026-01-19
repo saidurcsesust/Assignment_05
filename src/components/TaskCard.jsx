@@ -11,17 +11,27 @@ export default function TaskCard({ task, onStatusClick }) {
       </div>
       <div className="task-card__footer">
         {task.completed ? (
-          <span className="badge">Done</span>
+          <button
+            type="button"
+            className="badge badge--button"
+            onClick={() => onStatusClick?.(task.id, task.completed)}
+          >
+            Done
+          </button>
         ) : (
           <button
             type="button"
             className="badge badge--pending badge--button"
-            onClick={() => onStatusClick?.(task.id)}
+            onClick={() => onStatusClick?.(task.id, task.completed)}
           >
             Pending
           </button>
         )}
-        <Link className="task-card__link" to={`/tasks/${task.id}`}>
+        <Link
+          className="task-card__link"
+          to={`/tasks/${task.id}`}
+          state={{ task }}
+        >
           View Details
         </Link>
       </div>
