@@ -29,15 +29,15 @@ persist across reloads.
 
 ### Dark Mode
 
-![Task details dark](public/screenshots/Screenshot%20from%202026-01-19%2013-07-27.png)
-![Task details dark](public/screenshots/Screenshot%20from%202026-01-19%2013-07-38.png)
-![Home dark](public/screenshots/Screenshot%20from%202026-01-19%2013-07-46.png)
+![Home dark](public/screenshots/HomePageNightMode.png)
+![Task list dark](public/screenshots/TaskListNightMode.png)
+![Task details dark](public/screenshots/TaskDetailsPageNightMode.png)
 
 ### Day Mode
 
-![Task details light](public/screenshots/Screenshot%20from%202026-01-19%2013-07-54.png)
-![Home light](public/screenshots/Screenshot%20from%202026-01-19%2013-08-04.png)
-![Task list light](public/screenshots/Screenshot%20from%202026-01-19%2013-08-12.png)
+![Home light](public/screenshots/HomePageDayMode.png)
+![Task list light](public/screenshots/TaskListPageDayMode.png)
+![Task details light](public/screenshots/TaskDetailsPageDayMode.png)
 
 ### Clone the repository
 
