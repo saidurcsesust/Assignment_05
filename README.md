@@ -1,16 +1,61 @@
-# React + Vite
+# Task List App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Task List App is a React + Vite project that pulls tasks from JSONPlaceholder,
+lets users search and paginate, and stores status changes locally so they
+persist across reloads.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Task list with pagination (20 per page)
+- Search by task title
+- Task detail page with status and metadata
+- Click "Pending" to mark a task as done
+- Status changes stored in localStorage
+- Loading and error states
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19
+- React Router
+- Vite
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Clone the repository
+
+```bash
+git clone https://github.com/saidurcsesust/Assignment_05.git
+cd Assignment_05
+```
+
+1. Install dependencies
+
+```bash
+npm install
+```
+
+2. Start the dev server
+
+```bash
+npm run dev
+```
+
+3. Open the app
+
+Vite will print the local URL in the terminal (usually
+`http://localhost:5173`).
+
+## Scripts
+
+- `npm run dev` - Start Vite dev server
+- `npm run build` - Build for production
+- `npm run preview` - Preview the production build
+- `npm run lint` - Run ESLint
+
+## Data Source
+
+Tasks are loaded from the JSONPlaceholder API:
+`https://jsonplaceholder.typicode.com/todos`
+
+Status updates are stored locally in `localStorage` under the key
+`taskStatusOverrides`.
