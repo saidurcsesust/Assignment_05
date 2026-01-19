@@ -25,6 +25,20 @@ persist across reloads.
 
 - https://eclectic-taffy-486dfc.netlify.app/tasks
 
+## Screenshots
+
+### Dark Mode
+
+![Task details dark](public/screenshots/Screenshot%20from%202026-01-19%2013-07-27.png)
+![Task details dark](public/screenshots/Screenshot%20from%202026-01-19%2013-07-38.png)
+![Home dark](public/screenshots/Screenshot%20from%202026-01-19%2013-07-46.png)
+
+### Day Mode
+
+![Task details light](public/screenshots/Screenshot%20from%202026-01-19%2013-07-54.png)
+![Home light](public/screenshots/Screenshot%20from%202026-01-19%2013-08-04.png)
+![Task list light](public/screenshots/Screenshot%20from%202026-01-19%2013-08-12.png)
+
 ### Clone the repository
 
 ```bash
