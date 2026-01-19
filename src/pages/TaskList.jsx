@@ -6,20 +6,33 @@ import TaskCard from '../components/TaskCard.jsx'
 
 const TASKS_URL = 'https://jsonplaceholder.typicode.com/todos'
 const PAGE_SIZE = 20
+const STORAGE_KEY = 'taskStatusOverrides'
 
 export default function TaskList() {
 
   // fetch data using API
   const { data: tasks, loading, error } = useFetch(TASKS_URL)
   const [taskItems, setTaskItems] = useState([])
+  const [statusOverrides, setStatusOverrides] = useState({})
   const [query, setQuery] = useState('')
   const [page, setPage] = useState(1)
 
+
   useEffect(() => {
-    if (tasks) {
-      setTaskItems(tasks)
-    }
-  }, [tasks])
+    if (!tasks) return
+    setTaskItems(
+      tasks.map((task) => {
+        const override = statusOverrides[task.id]
+        return override === undefined
+          ? task
+          : { ...task, completed: override }
+      }),
+    )
+  }, [tasks, statusOverrides])
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(statusOverrides))
+  }, [statusOverrides])
 
   const filteredTasks = useMemo(() => {
     if (!taskItems) return []
@@ -41,11 +54,7 @@ export default function TaskList() {
   }, [filteredTasks, page]) 
 
   const handleStatusClick = (taskId) => {
-    setTaskItems((prev) =>
-      prev.map((task) =>
-        task.id === taskId ? { ...task, completed: true } : task,
-      ),
-    )
+    setStatusOverrides((prev) => ({ ...prev, [taskId]: true }))
   }
 
   return (
