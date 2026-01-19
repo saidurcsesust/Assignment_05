@@ -96,7 +96,8 @@ export default function TaskList() {
       {!loading && !error && (
         <>
           <p className="tasks__count">
-            Showing {page*PAGE_SIZE} of {filteredTasks.length} tasks
+            Showing {Math.min(page * PAGE_SIZE, filteredTasks.length)} of{' '}
+            {filteredTasks.length} tasks
           </p>
 
           {/* card start here */}
