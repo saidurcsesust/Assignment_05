@@ -29,9 +29,9 @@ export default function Navbar() {
           Tasks
         </NavLink>
       </nav>
-      {/* <button className="navbar__toggle" onClick={toggleTheme} type="button">
+      <button className="navbar__toggle" onClick={toggleTheme} type="button">
         {theme === 'light' ? 'Night Mode' : 'Day Mode'}
-      </button> */}
+      </button>
     </header>
   )
 }

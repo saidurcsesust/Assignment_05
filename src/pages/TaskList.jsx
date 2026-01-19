@@ -11,17 +11,24 @@ export default function TaskList() {
 
   // fetch data using API
   const { data: tasks, loading, error } = useFetch(TASKS_URL)
+  const [taskItems, setTaskItems] = useState([])
   const [query, setQuery] = useState('')
   const [page, setPage] = useState(1)
 
+  useEffect(() => {
+    if (tasks) {
+      setTaskItems(tasks)
+    }
+  }, [tasks])
+
   const filteredTasks = useMemo(() => {
-    if (!tasks) return []
+    if (!taskItems) return []
     const normalized = query.trim().toLowerCase()
-    if (!normalized) return tasks
-    return tasks.filter((task) =>
+    if (!normalized) return taskItems
+    return taskItems.filter((task) =>
       task.title.toLowerCase().includes(normalized),
     )
-  }, [tasks, query])
+  }, [taskItems, query])
 
   const totalPages = Math.max(
     1,
@@ -32,6 +39,14 @@ export default function TaskList() {
     const start = (page - 1) * PAGE_SIZE
     return filteredTasks.slice(start, start + PAGE_SIZE)
   }, [filteredTasks, page]) 
+
+  const handleStatusClick = (taskId) => {
+    setTaskItems((prev) =>
+      prev.map((task) =>
+        task.id === taskId ? { ...task, completed: true } : task,
+      ),
+    )
+  }
 
   return (
     <section className="tasks">
@@ -67,7 +82,11 @@ export default function TaskList() {
           {/* card start here */}
           <div className="tasks__grid">
             {pagedTasks.map(( task) => (
-              <TaskCard key={task.id} task={task} />
+              <TaskCard
+                key={task.id}
+                task={task}
+                onStatusClick={handleStatusClick}
+              />
             ))}
           </div>
 

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-export default function TaskCard({ task }) {
+export default function TaskCard({ task, onStatusClick }) {
   return (
     <article
       className={`task-card ${task.completed ? 'task-card--done' : ''}`}
@@ -13,7 +13,13 @@ export default function TaskCard({ task }) {
         {task.completed ? (
           <span className="badge">Done</span>
         ) : (
-          <span className="badge badge--pending">Pending</span>
+          <button
+            type="button"
+            className="badge badge--pending badge--button"
+            onClick={() => onStatusClick?.(task.id)}
+          >
+            Pending
+          </button>
         )}
         <Link className="task-card__link" to={`/tasks/${task.id}`}>
           View Details
