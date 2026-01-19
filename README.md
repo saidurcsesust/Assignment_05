@@ -18,12 +18,7 @@ persist across reloads.
 - React 19
 - React Router
 - Vite
-
-## Getting Started
-
-## Live Demo
-
-- https://eclectic-taffy-486dfc.netlify.app/tasks
+- CSS
 
 ## Screenshots
 
@@ -38,6 +33,9 @@ persist across reloads.
 ![Home light](public/screenshots/HomePageDayMode.png)
 ![Task list light](public/screenshots/TaskListPageDayMode.png)
 ![Task details light](public/screenshots/TaskDetailsPageDayMode.png)
+
+## Getting Started  
+
 
 ### Clone the repository
 
@@ -68,7 +66,6 @@ Vite will print the local URL in the terminal (usually
 - `npm run dev` - Start Vite dev server
 - `npm run build` - Build for production
 - `npm run preview` - Preview the production build
-- `npm run lint` - Run ESLint
 
 ## Data Source
 
