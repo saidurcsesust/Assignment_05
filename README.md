@@ -22,17 +22,19 @@ persist across reloads.
 
 ## Screenshots
 
-### Dark Mode
-
+### Home Page Light Mode
+![Home light](public/screenshots/HomePageDayMode.png)
+### Home Page Night Mode
 ![Home dark](public/screenshots/HomePageNightMode.png)
+### TaskList Page Light Mode
+![Task list light](public/screenshots/TaskListPageDayMode.png)
+### TaskList Page Night Mode
 ![Task list dark](public/screenshots/TaskListNightMode.png)
+### TaskDetails Page Light Mode
+![Task details light](public/screenshots/TaskDetailsPageDayMode.png)
+### TaskDetials Page Night Mode
 ![Task details dark](public/screenshots/TaskDetailsPageNightMode.png)
 
-### Day Mode
-
-![Home light](public/screenshots/HomePageDayMode.png)
-![Task list light](public/screenshots/TaskListPageDayMode.png)
-![Task details light](public/screenshots/TaskDetailsPageDayMode.png)
 
 ## Getting Started  
 
